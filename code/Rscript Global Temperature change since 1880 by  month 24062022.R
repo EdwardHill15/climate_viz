@@ -65,4 +65,4 @@ annotation <- t_data %>%
     legend.key.height = unit(70, "pt")
 )
 
-ggsave("figures/temperature_lines.png", width = 8, height = 4.5)
+ggsave("figures/climate_spiral.png", width = 8, height = 4.5)
