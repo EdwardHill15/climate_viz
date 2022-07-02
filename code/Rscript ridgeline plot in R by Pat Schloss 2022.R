@@ -98,8 +98,7 @@ t_data <- as.data.table(t_anomaly.array) %>%
     axis.ticks = element_line(color = "white"),
     axis.ticks.y = element_blank(),
     axis.line.x = element_line(color = "white"),
-    axis.line.y = element_blank() +
-    transition_reveal(t_data$year)
+    axis.line.y = element_blank() 
   )
 
 ggsave("figures/temp_distribution.png", height = 6, width = 4)
