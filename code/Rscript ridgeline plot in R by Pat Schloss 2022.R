@@ -26,6 +26,8 @@ library(data.table)
 library(lubridate)
 library(ggplot2)
 library(ggridges)
+library(gganimate)
+library(gifski)
 
 url <- "https://data.giss.nasa.gov/pub/gistemp/gistemp250_GHCNv4.nc.gz"
 
@@ -72,7 +74,7 @@ t_data <- as.data.table(t_anomaly.array) %>%
   group_by(year) %>% 
   mutate(t_ave = mean(t_diff))
   
-t_data %>% 
+ t_data %>% 
   #filter(year %in% c(1950, 1980, 2000, 2020)) %>% 
   ggplot(aes(x = t_diff, 
              y = factor(year, levels = seq(2021, 1950, -1)), 
@@ -96,14 +98,14 @@ t_data %>%
     axis.ticks = element_line(color = "white"),
     axis.ticks.y = element_blank(),
     axis.line.x = element_line(color = "white"),
-    axis.line.y = element_blank()
+    axis.line.y = element_blank() +
+    transition_reveal(t_data$year)
   )
-  
-  ggsave("figures/temp_distribution.png", height = 6, width = 4)
+
+ggsave("figures/temp_distribution.png", height = 6, width = 4)
 
 
 nc_close(nc_data)
 unlink("gistemp250_GHCNv4.nc")
 unlink("gistemp250_GHCNv4.txt")
-
 
