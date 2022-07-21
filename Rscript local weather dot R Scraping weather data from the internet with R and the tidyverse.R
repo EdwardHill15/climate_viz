@@ -89,8 +89,8 @@ local_weather %>%
 t_diff <- local_weather %>% 
   mutate(year = year(date)) %>% 
   group_by(year) %>% 
-  summarize(mean = mean(TMAX / 10)) %>% 
-  ggplot(aes(x=year, y=mean, color = mean)) +
+  summarize(max = max(TMAX / 10)) %>% 
+  ggplot(aes(x=year, y=max, color = max)) +
   geom_point(size = 9, alpha = .7) +
   geom_smooth(method = "lm", formula = y ~x, se = FALSE, color = "gray") +
   scale_color_viridis_c(option = ("magma")) +
@@ -98,11 +98,12 @@ t_diff <- local_weather %>%
   #                       midpoint = 13.5) + 
 #coord_cartesian(xlim=c(10,16)) +
 #coord_cartesian(expand=TRUE) +
-scale_y_continuous(breaks = seq(10, 16, 2)) +
-labs(y = "Temperature in (\u00B0 C)", 
+  scale_y_continuous(breaks = seq(27.5, 37.5, 2.5),
+                   limits = c(26, 37.5)) +
+  labs(y = "Temperature in (\u00B0 C)", 
      x = NULL,
-     title = "Rise of temperature in The Netherlands between 1951 - 2008",
-     subtitle = "Temperature is colored by the size of the mean temperature value",
+     title = "Rise temperature in The Netherlands between 1951-2008",
+     subtitle = "Temperature is colored by the size of the max temperature value",
      caption = "Source: https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt") +
   theme(
     plot.background = element_rect(fill = "black", color = "black"),
@@ -123,6 +124,6 @@ labs(y = "Temperature in (\u00B0 C)",
     legend.title = element_text(color = "white"),
     legend.position = "bottom")
 library(ggplot2)
-ggsave("rise_temp_netherlands.png", height = 6, width = 11)
+ggsave("rise_temp_max_netherlands.png", height = 6, width = 11)
 
   
