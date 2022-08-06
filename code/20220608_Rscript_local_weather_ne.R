@@ -40,7 +40,7 @@ local_weather %>%
   coord_cartesian(clip = "off") +
   labs(x=NULL,
         y=NULL,
-       title = "Probability and Average Precipitation in The Netherlands",
+       title = "Probability and Average Precipitation in The Netherlands from 1901 - 2022",
        #title = glue("Through {today_month} {today_day}, the precipitation in The Netherlands near De Bilt has a <span style = 'color: red'>probability</span> and <span style = 'color: red'>average</span> for {today_date}")) +
        subtitle = "The red vertical line is today (August 6th, 2022)") +
   theme(
@@ -52,22 +52,16 @@ local_weather %>%
     plot.background = element_rect(fill = "black", color = "black"),
     axis.line = element_line(),
     plot.title.position = "plot",
-    plot.title = element_textbox_simple(margin=margin(b=10), size = 25, color = "white"),
+    plot.title = element_textbox_simple(margin=margin(b=10), size = 22, color = "white"),
     plot.subtitle = element_textbox_simple(margin=margin(b=10), size = 15, color = "white"),
     axis.title.y = element_text(color = "white"),
     axis.text = element_text(color = "white", size = 12),
     legend.background = element_rect(fill = "black"),
-    legend.text = element_text(color = "white", size = 10),
-    legend.title = element_text(color = "white"),
-    legend.position = "bottom",
-    legend.key = element_rect(fill = "black")
-    
-
-    
-    
-    
-    
-    
+    # legend.text = element_text(color = "white", size = 10),
+    # legend.title = element_text(color = "white"),
+    #legend.position = "bottom",
+    legend.position = "none",
+    #legend.key = element_rect(fill = "black")
   )
 
 ggsave("figures/prob_prcp_amount_ne.png", width = 7, height = 9)
