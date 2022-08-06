@@ -34,13 +34,14 @@ local_weather %>%
   facet_wrap(~name, ncol = 1, scales = "free_y", 
              strip.position = "left",
              labeller = labeller(name = pretty_labels)) +
+  scale_color_manual(values = c("red", "green", "dodgerblue")) +
   scale_y_continuous(limits = c(0,NA), expand = c(0,0)) +
   scale_x_date(date_breaks = "2 months", 
                date_labels = "%B") +
   coord_cartesian(clip = "off") +
   labs(x=NULL,
         y=NULL,
-       title = "Probability and Average Precipitation in The Netherlands from 1901 - 2022",
+       title = "<span style = 'color: red'>Probability</span> and <span style = 'color: green'>Aver</span><span style = 'color: dodgerblue'>age</span> Precipitation in The Netherlands from 1901 - 2022",
        #title = glue("Through {today_month} {today_day}, the precipitation in The Netherlands near De Bilt has a <span style = 'color: red'>probability</span> and <span style = 'color: red'>average</span> for {today_date}")) +
        subtitle = "The red vertical line is today (August 6th, 2022)") +
   theme(
