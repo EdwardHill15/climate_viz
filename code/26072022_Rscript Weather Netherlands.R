@@ -58,9 +58,9 @@ df <- read_csv(station_daily,
          col_names = c("station", "date", "variable", "value", "a", "b", "c", "d")) %>% 
   select(date, variable, value) %>% 
   pivot_wider(names_from = "variable", values_from = "value",
-              values_fill = 0) %>% 
-  select(date, TMAX, TMIN, PRCP)
-
+               values_fill = 0)
+  # select(date, TMAX, TMIN, PRCP)
+colnames(df) <- c("date", "tmax", "tmin", "prcp", "tavg", "snow")
 # ELEMENT    is the element type.   There are five core elements as well as a number
 # of addition elements.  
 # 
@@ -85,12 +85,9 @@ df <- df %>%
 #   geom_smooth(method = "lm", formula = y ~x)
 
 df
-NE_max <- aggregate(TMAX~year(date), df, max)
-NE_max$TMAX <- NE_max$TMAX / 10
+NE_max <- aggregate(tmax~year(date), df, max)
+NE_max$tmax <- NE_max$tmax / 10
 colnames(NE_max) <- c("year", "temp")
-
-
-
 
 # NE_max %>% 
 #   ggplot(aes(x=year, y=temp, col=temp)) +
